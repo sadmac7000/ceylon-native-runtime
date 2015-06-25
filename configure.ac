@@ -29,6 +29,13 @@ test "x$GENHTML" = "xno" -a "x$enable_lcov" = xyes && \
 
 AC_PATH_PROG([VALGRIND], [valgrind], [no])
 
+AC_ARG_WITH([launcher], [AS_HELP_STRING(
+	     [--without-launcher],
+	 [Build the launcher binary])
+], [], [with_launcher=yes])
+
+AM_CONDITIONAL([BUILD_LAUNCHER], [ test "x$with_launcher" != xno ])
+
 LT_INIT
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_HEADERS([include/config.h])
