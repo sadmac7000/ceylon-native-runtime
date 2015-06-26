@@ -15,6 +15,11 @@ AC_ARG_ENABLE([lcov], [AS_HELP_STRING(
 
 lcov_CFLAGS=
 
+AC_PATH_PROG([XXD], [xxd], [no])
+test "x$XXD" = "xno" && AC_MSG_ERROR([xxd command not found])
+
+AC_ARG_VAR([XXD], [Hex data transformation tool])
+
 AC_PATH_PROG([LCOV], [lcov], [no])
 AC_PATH_PROG([GENHTML], [genhtml], [no])
 AS_IF([test "x$enable_lcov" = xyes], [
