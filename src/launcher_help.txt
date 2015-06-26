@@ -1,1 +1,2 @@
-This is some help text
+This command can be used to invoke a native-compiled Ceylon module. The module
+must share a run() method, which will serve as the entry point.
