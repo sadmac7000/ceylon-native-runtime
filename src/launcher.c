@@ -39,7 +39,7 @@ main(int argc, char **argv) {
 		errx(1, "Failed to load library");
 	}
 
-	run = dlsym(bind, "run");
+	run = dlsym(bind, "ceylon_run");
 
 	if (! run)
 		errx(1, "Module does not have \'run\' symbol");
