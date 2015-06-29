@@ -11,7 +11,7 @@ print(int64_t *in)
 	} else if (in[0]) {
 		printf("<badtype>\n");
 	} else {
-		printf("%*s\n", (int)in[1], (char *)in[2]);
+		printf("%.*s\n", (int)in[1], (char *)in[2]);
 	}
 	return NULL;
 }
