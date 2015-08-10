@@ -4,7 +4,7 @@
 #include "util.h"
 
 API_EXPORT int64_t *
-print(int64_t *in)
+__ceylon_language_print(int64_t *in)
 {
 	if (! in) {
 		printf("<null>\n");
