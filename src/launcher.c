@@ -11,7 +11,7 @@ extern unsigned int launcher_help_txt_len;
 int
 main(int argc, char **argv) {
 	void *bind;
-	int64_t * (*run)();
+	int64_t * (*run)() = NULL;
 	int i;
 
 	for (i = 1; i < argc; i++) {
@@ -29,17 +29,17 @@ main(int argc, char **argv) {
 		exit(0);
 	}
 
-	if (argc != 2)
-		errx(1, "Wrong number of arguments");
+	for (i = 1; i < argc; i++) {
+		bind = dlopen(argv[i], RTLD_LAZY | RTLD_GLOBAL);
 
-	bind = dlopen(argv[1], RTLD_LAZY);
+		if (! bind) {
+			fprintf(stderr, "%s\n", dlerror());
+			errx(1, "Failed to load library");
+		}
 
-	if (! bind) {
-		fprintf(stderr, "%s\n", dlerror());
-		errx(1, "Failed to load library");
+		if (i == 1)
+			run = dlsym(bind, "ceylon_run");
 	}
-
-	run = dlsym(bind, "ceylon_run");
 
 	if (! run)
 		errx(1, "Module does not have \'run\' symbol");
