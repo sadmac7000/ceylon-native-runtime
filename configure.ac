@@ -15,11 +15,6 @@ AC_ARG_ENABLE([lcov], [AS_HELP_STRING(
 
 lcov_CFLAGS=
 
-AC_PATH_PROG([XXD], [xxd], [no])
-test "x$XXD" = "xno" && AC_MSG_ERROR([xxd command not found])
-
-AC_ARG_VAR([XXD], [Hex data transformation tool])
-
 AC_PATH_PROG([LCOV], [lcov], [no])
 AC_PATH_PROG([GENHTML], [genhtml], [no])
 AS_IF([test "x$enable_lcov" = xyes], [
@@ -33,13 +28,6 @@ test "x$GENHTML" = "xno" -a "x$enable_lcov" = xyes && \
 	AC_MSG_ERROR([genhtml command (part of lcov) not found])
 
 AC_PATH_PROG([VALGRIND], [valgrind], [no])
-
-AC_ARG_WITH([launcher], [AS_HELP_STRING(
-	     [--without-launcher],
-	 [Build the launcher binary])
-], [], [with_launcher=yes])
-
-AM_CONDITIONAL([BUILD_LAUNCHER], [ test "x$with_launcher" != xno ])
 
 LT_INIT
 AC_CONFIG_MACRO_DIR([m4])

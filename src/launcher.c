@@ -1,48 +1,24 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include <stdint.h>
-#include <string.h>
+#include <stdlib.h>
 #include <err.h>
 #include <dlfcn.h>
 
-extern unsigned char launcher_help_txt[];
-extern unsigned int launcher_help_txt_len;
-
 int
 main(int argc, char **argv) {
-	void *bind;
 	int64_t * (*run)() = NULL;
 	int i;
 
 	for (i = 1; i < argc; i++) {
-		if (! strcmp("--_print-summary", argv[i])) {
-			printf("Executes a Ceylon program\n");
-		} else if (! strcmp("--_print-usage", argv[i])) {
-			printf("<module>\n");
-		} else if (! strcmp("--_print-description", argv[i])) {
-			printf("%*s\n", launcher_help_txt_len,
-			       launcher_help_txt);
-		} else {
-			continue;
-		}
-
-		exit(0);
-	}
-
-	for (i = 1; i < argc; i++) {
-		bind = dlopen(argv[i], RTLD_LAZY | RTLD_GLOBAL);
-
-		if (! bind) {
-			fprintf(stderr, "%s\n", dlerror());
-			errx(1, "Failed to load library");
-		}
+		if (! dlopen(argv[i], RTLD_LAZY | RTLD_GLOBAL))
+			errx(1, "%s", dlerror());
 
 		if (i == 1)
-			run = dlsym(bind, "ceylon_run");
+			run = dlsym(RTLD_DEFAULT, "__ceylon_run");
 	}
 
+
 	if (! run)
-		errx(1, "Module does not have \'run\' symbol");
+		errx(1, "Module does not have 'run' symbol");
 
 	run();
 	return 0;

@@ -30,5 +30,4 @@ coverage.info*
 libceylon-*.tar.*
 test-driver
 tests/test-suite.log
-src/ceylon-run-native
-src/launcher_help.c
+src/ceylon-launcher
