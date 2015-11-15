@@ -1,4 +1,4 @@
-AC_INIT([libceylon], [1.1.1], [casey.dahlin@gmail.com])
+AC_INIT([libceylon], [1.2.0], [casey.dahlin@gmail.com])
 AM_INIT_AUTOMAKE([-Wall -Werror -Wno-portability foreign
                   parallel-tests subdir-objects])
 AM_EXTRA_RECURSIVE_TARGETS([valgrind])
