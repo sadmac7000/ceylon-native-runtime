@@ -4,7 +4,8 @@ symbol_map = \
     c$(lmvb64).ceylon.language.print=__ceylon_language_print \
     c$(lmvb64).ceylon.language.\$$Basic\$$vtable=__ceylon_language_Basic_vtable \
     c$(lmvb64).ceylon.language.\$$Basic\$$size=__ceylon_language_Basic_size \
-    c$(lmvb64).ceylon.language.\$$Basic\$$vtsize=__ceylon_language_Basic_vtsize
+    c$(lmvb64).ceylon.language.\$$Basic\$$vtSize=__ceylon_language_Basic_vtsize \
+    c$(lmvb64).ceylon.language.\$$Basic\$$setup=__ceylon_language_Basic_setup
 
 comma := ,
 empty :=
@@ -23,5 +24,6 @@ libceylon_la_SOURCES = \
 libexec_PROGRAMS = ceylon-launcher
 ceylon_launcher_SOURCES = launcher.c
 ceylon_launcher_LDFLAGS = -ldl
+ceylon_launcher_LDADD = libceylon.la
 
 MOSTLYCLEANFILES = *.gcda *.gcno *.gcov *.gcov_report

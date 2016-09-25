@@ -12,3 +12,6 @@ int64_t __ceylon_language_Basic_size = 2;
 
 API_EXPORT
 int64_t __ceylon_language_Basic_vtsize = sizeof(basic_vtable) / 8;
+
+API_EXPORT
+void __ceylon_language_Basic_setup() {}
